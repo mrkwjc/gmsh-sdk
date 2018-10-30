@@ -1,6 +1,7 @@
 # gmsh-sdk
 This project downloads and installs Gmsh SDK in a pythonic way, just for your convenience.
-Installation should work under Linux, Windows and MacOSX for both Python 2 and 3.
+Installation should work under Linux, Windows and MacOSX for both Python 2 and 3. Note that
+on Linux you will need gfortan (libgfortran) to be present.
 
 Install with:
 ```
