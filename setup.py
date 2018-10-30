@@ -11,11 +11,14 @@ from __future__ import print_function
 import sys
 import os
 import platform
-from future.moves.urllib.request import urlopen
 import tarfile
 import zipfile
 from distutils import sysconfig
 from distutils.core import setup
+if sys.version_info.major == 2:
+    from urllib2 import urlopen
+else:
+    from urllib.request import urlopen
 
 if __name__ == "__main__":
     server = 'http://gmsh.info/bin'
