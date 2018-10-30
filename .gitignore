@@ -1,6 +1,9 @@
 # gmsh-sdk
 .directory
 gmsh-*
+*.msh
+*.geo
+*.brep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

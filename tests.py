@@ -26,3 +26,8 @@ def test_gmsh_import():
 def test_gmsh_subprocess():
     import subprocess
     subprocess.call(['gmsh', '--help'])
+
+
+if __name__=="__main__":
+    test_gmsh_import()
+    test_gmsh_subprocess()
