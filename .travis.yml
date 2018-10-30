@@ -1,0 +1,26 @@
+os:
+    - linux
+    - osx
+    - windows
+language: python
+python:
+    - 2.7
+    - 3.6
+install:
+    - pip install --user .
+    - pip uninstall gmsh-sdk
+    - pip install .
+script:
+    - python tests.py
+#before_deploy:
+    #- cd $TRAVIS_BUILD_DIR
+#deploy:
+    #provider: pypi
+    #user: mwojc
+    #password:
+        #secure: ....
+    #distributions: "sdist"
+    #skip_cleanup: true
+    #on:
+        #tags: true
+        #branch: master
