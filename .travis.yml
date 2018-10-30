@@ -2,11 +2,9 @@ language: python
 python:
     - 2.7
     - 3.6
-before_install:
-    - pip install --prefix=/opt .
-    - pip uninstall gmsh-sdk
 install:
-    - pip install .
+    - python setup.py sdist
+    - pip install dist/*
 script:
     - python tests.py
 #before_deploy:
