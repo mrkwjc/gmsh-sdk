@@ -1,4 +1,6 @@
 # gmsh-sdk
+.extracted
+.downloaded
 .directory
 gmsh-*
 *.msh

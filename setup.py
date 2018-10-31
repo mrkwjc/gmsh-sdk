@@ -23,6 +23,7 @@ else:
 if __name__ == "__main__":
     server = 'http://gmsh.info/bin'
     version = '4.0.4'
+    iversion = version+''  # installer number
 
     system = platform.system().lower()
     machine = platform.machine().lower()
@@ -44,13 +45,18 @@ if __name__ == "__main__":
         url = server + "/Windows/" + fname
     else:
         url = server + "/MacOSX/" + fname
-    print('Downloading {}, please wait...'.format(url))
-    with open(fname, "wb") as f:
-        f.write(urlopen(url).read())
-    # urllib.urlretrieve(url, fname)
-    print('Unpacking {}, please wait...'.format(fname))
-    tar = tarfile.open(fname) if ext == '.tgz' else zipfile.ZipFile(fname, 'r')
-    tar.extractall()
+    if not os.path.isfile('.downloaded'):
+        print('Downloading {}, please wait...'.format(url))
+        with open(fname, "wb") as f:
+            f.write(urlopen(url).read())
+        with open('.downloaded', 'a'):
+            pass
+    if not os.path.isfile('.extracted'):
+        print('Extracting {}, please wait...'.format(fname))
+        tar = tarfile.open(fname) if ext == '.tgz' else zipfile.ZipFile(fname, 'r')
+        tar.extractall()
+        with open('.extracted', 'a'):
+            pass
     pth = open('gmsh.pth', 'w')
     pth.write(name+'/lib\n')
     pth.write(name+'/bin')
@@ -62,12 +68,17 @@ if __name__ == "__main__":
         dirs += [os.path.join(site_dirpath, dirpath)]
         files += [[os.path.join(dirpath, file) for file in filenames]]
     data_files = list(zip(dirs, files))
+    scripts = ['gmsh', 'gmsh.bat'] if plat.startswith('Windows') else ['gmsh']
 
-    setup(name              = 'gmsh-sdk',
-        version           = version,
-        description       = 'A three-dimensional finite element mesh generator',
-        keywords          = ['mesh', 'finite element method'],
-        url               = 'http://gmsh.info/',
+    setup(name            = 'gmsh-sdk',
+        version           = iversion,
+        description       = 'Gmsh SDK installer. Gmsh is a three-dimensional finite element mesh generator.',
+        long_description  = open('README.rst', 'r').read(),
+        long_description_content_type='text/markdown',
+        maintainer        = 'Marek Wojciechowski',
+        maintainer_email  = 'mrkwjc@gmail.com',
+        keywords          = ['fem', 'mesh', 'finite element method'],
+        url               = 'https://github.com/mrkwjc/gmsh-sdk',
         license           = 'GPL-2',
         platforms         = 'Posix, Windows',
         classifiers       = ['Development Status :: 5 - Production/Stable',
@@ -82,5 +93,5 @@ if __name__ == "__main__":
                             'Programming Language :: Python :: Implementation :: CPython',
                             'Topic :: Scientific/Engineering'],
         data_files=data_files,
-        scripts=['gmsh']
+        scripts=scripts
         )
