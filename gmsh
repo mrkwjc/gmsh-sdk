@@ -6,7 +6,15 @@ import gmsh
 
 dirname, _ = os.path.split(gmsh.__file__)
 os.putenv('LD_LIBRARY_PATH', dirname)
+# Try system lib, might be necessary on Anaconda for example
+syslib = os.path.realpath(os.path.join(dirname, '../../../../../lib'))
+if os.path.isdir(syslib):
+    os.putenv('LD_LIBRARY_PATH', syslib)
+syslib = os.path.realpath(os.path.join(dirname, '../../../../../lib64'))
+if os.path.isdir(syslib):
+    os.putenv('LD_LIBRARY_PATH', syslib)
 os.putenv('PATH', dirname)
+
 command = os.path.join(dirname, '../bin/gmsh')
 subprocess.call([command] + sys.argv[1:])
 
