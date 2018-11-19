@@ -22,7 +22,7 @@ else:
 
 if __name__ == "__main__":
     server = 'http://gmsh.info/bin'
-    version = '4.0.4'
+    version = '4.0.5'
     iversion = version+'-1'  # installer number
 
     system = platform.system().lower()
@@ -74,7 +74,7 @@ if __name__ == "__main__":
         version           = iversion,
         description       = 'Gmsh SDK installer. Gmsh is a three-dimensional finite element mesh generator.',
         long_description  = open('README.rst', 'r').read(),
-        long_description_content_type='text/markdown',
+        long_description_content_type='text/x-rst',
         maintainer        = 'Marek Wojciechowski',
         maintainer_email  = 'mrkwjc@gmail.com',
         keywords          = ['fem', 'mesh', 'finite element method'],
