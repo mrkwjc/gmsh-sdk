@@ -1,16 +1,21 @@
-#!/usr/bin/env python
+#!/home/mwojc/Anaconda/bin/python
 import os
 import sys
 import subprocess
 import gmsh
 
-# Gmsh lib directory
+# Gmsh and system lib directory
 dirname, _ = os.path.split(gmsh.__file__)
+sysname, _ = os.path.split(os.__file__)
 
-# Set Gmsh lib path
+# Set environment
 envvar = 'PATH' if 'win' in sys.platform else 'LD_LIBRARY_PATH'
 envval = os.environ[envvar] if envvar in os.environ.keys() else ''
-os.environ[envvar] = dirname + os.pathsep + envval
+#
+os.environ[envvar] = dirname + os.pathsep + \
+                     os.path.realpath(dirname+'/../../../..') + os.pathsep + \
+                     os.path.realpath(sysname+'/..') + os.pathsep + \
+                     envval
 
 # Run Gmsh command
 command = os.path.join(dirname, '../bin/gmsh')
