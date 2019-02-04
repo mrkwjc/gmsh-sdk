@@ -22,8 +22,8 @@ else:
 
 if __name__ == "__main__":
     server = 'http://gmsh.info/bin'
-    version = '4.1.3'
-    iversion = version+'-2'  # installer number
+    version = '4.1.4'
+    iversion = version+'-1'  # installer number
 
     system = platform.system().lower()
     machine = platform.machine().lower()
