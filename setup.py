@@ -39,12 +39,12 @@ if __name__ == "__main__":
     name = "gmsh-{}-{}-sdk".format(version, plat)
     ext = '.zip' if plat.startswith('Windows') else '.tgz'
     fname = name + ext
-    if plat.startswith('Linux'):
-        url = server + "/Linux/" + fname
-    elif plat.startswith('Windows'):
-        url = server + "/Windows/" + fname
-    else:
-        url = server + "/MacOSX/" + fname
+    # if plat.startswith('Linux'):
+    url = server + "/" + fname
+    # elif plat.startswith('Windows'):
+    #     url = server + "/Windows/" + fname
+    # else:
+    #     url = server + "/MacOSX/" + fname
     if not os.path.isfile('.downloaded'):
         print('Downloading {}, please wait...'.format(url))
         with open(fname, "wb") as f:
