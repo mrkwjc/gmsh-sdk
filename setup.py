@@ -21,9 +21,9 @@ else:
     from urllib.request import urlopen
 
 if __name__ == "__main__":
-    server = 'http://gmsh.info/bin'
-    version = '4.2.1'
-    iversion = version+'-1'  # installer number
+    server = 'http://gmsh.info/beta'
+    version = 'git'
+    iversion = '9999'+'-1'  # installer number
 
     system = platform.system().lower()
     machine = platform.machine().lower()
