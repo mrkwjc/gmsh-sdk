@@ -2,20 +2,20 @@ language: python
 python:
     - 2.7
     - 3.6
-before_install:
-    - sudo apt-get install gfortran
+# before_install:
+#    - sudo apt-get install gfortran
 install:
     - python setup.py sdist
     - pip install dist/*
 script:
     - python tests.py
-deploy:
-    provider: pypi
-    user: mwojc
-    password:
-        secure: ZUnCgfyugH8RUN2BetjNSFyZT2sN2HDlBl7jTcDKUe+eWLQzbTfkJJjnqQOqSVkZkmUgIGDn1TQTC8ekFLBbsLpTEp3knZ/vFJ2XOQMDPLTI43At3IEl6U2I/3HHLB/ahH0V1x1cHyAmM+gIyJQAhrNX8FemZQW69s9EP9n26A1IWwaqA51qIflTWSLMUoFm09nDypYc1DNvxrHpWolR+tvtzPoekT8/waYlo42AST+umeaYDh7iAzIUQEtKgwlsXGKDtBTv6jen2ZAmVJQdjl2zud5PaVcaZXrJRIoJz4IbhEOYtwze1e7PusqVX+gVSsa4ASN+jUI3RM0emdLfFPuM1P2rQnoMYhMoWlYVh/YXLNhga8Qy9kfR7/shT2W35G0Jokb5dRNDKhQMMBvW9hDIpcphGCpUVEcOqPO4fQ5+DJUDYN0GdSF+KWNSyPgv53l8BUiPiwTZAMFycNQDrRD8HGLm3QyqSX4CfZvKs0xxsonAUKd+AsU40CPOELi/YGZKuIdUsPH+7/EEt11pWnqo8F9Lg6Q8ydfIMxvkXlfs+BVQ/3eESEPpwjWPLCWyJDuaOjF7geokzhjkDku5wgpxztyzmniqUlhStlRwD4CZWGXeb6/aRUXHxTCdUMnHv90GTLSISJqtexfqcnkm/6YHp5IVAgJrELXmiVuBB8Q=
-    distributions: "sdist"
-    skip_cleanup: true
-    on:
-        tags: true
-        branch: master
+# deploy:
+#    provider: pypi
+#    user: mwojc
+#    password:
+#        secure: ZUnCgfyugH8RUN2BetjNSFyZT2sN2HDlBl7jTcDKUe+eWLQzbTfkJJjnqQOqSVkZkmUgIGDn1TQTC8ekFLBbsLpTEp3knZ/vFJ2XOQMDPLTI43At3IEl6U2I/3HHLB/ahH0V1x1cHyAmM+gIyJQAhrNX8FemZQW69s9EP9n26A1IWwaqA51qIflTWSLMUoFm09nDypYc1DNvxrHpWolR+tvtzPoekT8/waYlo42AST+umeaYDh7iAzIUQEtKgwlsXGKDtBTv6jen2ZAmVJQdjl2zud5PaVcaZXrJRIoJz4IbhEOYtwze1e7PusqVX+gVSsa4ASN+jUI3RM0emdLfFPuM1P2rQnoMYhMoWlYVh/YXLNhga8Qy9kfR7/shT2W35G0Jokb5dRNDKhQMMBvW9hDIpcphGCpUVEcOqPO4fQ5+DJUDYN0GdSF+KWNSyPgv53l8BUiPiwTZAMFycNQDrRD8HGLm3QyqSX4CfZvKs0xxsonAUKd+AsU40CPOELi/YGZKuIdUsPH+7/EEt11pWnqo8F9Lg6Q8ydfIMxvkXlfs+BVQ/3eESEPpwjWPLCWyJDuaOjF7geokzhjkDku5wgpxztyzmniqUlhStlRwD4CZWGXeb6/aRUXHxTCdUMnHv90GTLSISJqtexfqcnkm/6YHp5IVAgJrELXmiVuBB8Q=
+#    distributions: "sdist"
+#    skip_cleanup: true
+#    on:
+#        tags: true
+#        branch: master
