@@ -23,7 +23,7 @@ else:
 if __name__ == "__main__":
     server = 'http://gmsh.info/beta'
     version = 'git'
-    iversion = '9999'+'-1'  # installer number
+    iversion = '9999'+'-2'  # installer number
 
     system = platform.system().lower()
     machine = platform.machine().lower()
