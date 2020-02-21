@@ -6,8 +6,8 @@ before_install:
     - sudo apt-get install libglu1-mesa
     #- sudo apt-get install gfortran
 install:
-    - python setup.py sdist
-    - pip install dist/*
+    # - python setup.py sdist
+    - pip install .  #dist/*
 script:
     - python tests.py
 deploy:
