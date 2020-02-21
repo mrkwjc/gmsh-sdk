@@ -47,8 +47,10 @@ if __name__ == "__main__":
         url = server + "/MacOSX/" + fname
     if not os.path.isfile('.downloaded'):
         print('Downloading {}, please wait...'.format(url))
+        import requests
+        sdk = requests.get(url, allow_redirects=True)
         with open(fname, "wb") as f:
-            f.write(urlopen(url).read())
+            f.write(sdk.content)
         with open('.downloaded', 'a'):
             pass
     if not os.path.isfile('.extracted'):
@@ -93,5 +95,6 @@ if __name__ == "__main__":
                             'Programming Language :: Python :: Implementation :: CPython',
                             'Topic :: Scientific/Engineering'],
         data_files=data_files,
-        scripts=scripts
+        scripts=scripts,
+        install_requires=['requests']
         )
