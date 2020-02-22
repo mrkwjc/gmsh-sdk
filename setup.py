@@ -8,17 +8,18 @@
 ########################################################################
 
 from __future__ import print_function
-import sys
 import os
+import sys
 import platform
 import tarfile
 import zipfile
 from distutils import sysconfig
 from distutils.core import setup
-if sys.version_info.major == 2:
-    from urllib2 import urlopen
-else:
-    from urllib.request import urlopen
+try:
+    import requests
+except ImportError:
+    sys.exit("Install 'requests' package first.")
+
 
 if __name__ == "__main__":
     server = 'http://gmsh.info/bin'
@@ -47,7 +48,6 @@ if __name__ == "__main__":
         url = server + "/MacOSX/" + fname
     if not os.path.isfile('.downloaded'):
         print('Downloading {}, please wait...'.format(url))
-        import requests
         sdk = requests.get(url, allow_redirects=True)
         with open(fname, "wb") as f:
             f.write(sdk.content)
