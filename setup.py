@@ -96,5 +96,5 @@ if __name__ == "__main__":
                             'Topic :: Scientific/Engineering'],
         data_files=data_files,
         scripts=scripts,
-        install_requires=['requests']
+        # install_requires=['requests']
         )
