@@ -14,7 +14,7 @@ import platform
 import tarfile
 import zipfile
 from distutils import sysconfig
-from setuptools import setup
+from distutils.core import setup
 if sys.version_info.major == 2:
     from urllib2 import urlopen
 else:
