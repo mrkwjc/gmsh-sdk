@@ -1,15 +1,13 @@
 language: python
 python:
-    # - 2.7
+    - 2.7
     - 3.6
 before_install:
     - sudo apt-get install libglu1-mesa
     - pip install requests
-    - python -c 'import requests; print(requests.__version__)'
-    #- sudo apt-get install gfortran
 install:
-    # - python setup.py sdist
-    - pip install .  #dist/*
+    - python setup.py sdist
+    - pip install dist/*
 script:
     - python tests.py
 deploy:
