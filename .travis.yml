@@ -4,7 +4,7 @@ python:
     - 3.6
 before_install:
     - sudo apt-get install libglu1-mesa
-    - sudo apt-get install python-requests
+    - pip install requests
     - python -c 'import requests; print(requests.__version__)'
     #- sudo apt-get install gfortran
 install:
