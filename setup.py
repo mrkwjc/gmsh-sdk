@@ -23,8 +23,8 @@ except ImportError:
 
 if __name__ == "__main__":
     server = 'http://gmsh.info/bin'
-    version = '4.5.2'
-    iversion = version+'-2'  # installer number
+    version = '4.5.3'
+    iversion = version+'-1'  # installer number
 
     system = platform.system().lower()
     machine = platform.machine().lower()
