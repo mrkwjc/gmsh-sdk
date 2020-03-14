@@ -21,7 +21,7 @@ from setuptools.command.install import install
 # Server and gmsh version
 server = 'http://gmsh.info/bin'
 version = '4.5.4'
-iversion = version+'-2'  # installer number
+iversion = version+'-3'  # installer number
 
 # Determine file name and and url to be downloaded and installed
 system = platform.system().lower()
