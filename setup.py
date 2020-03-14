@@ -14,64 +14,75 @@ import platform
 import tarfile
 import zipfile
 from distutils import sysconfig
-from distutils.core import setup
-try:
-    import requests
-except ImportError:
-    sys.exit("Install 'requests' package first.")
+from setuptools import setup
+from setuptools.command.install import install
 
 
-if __name__ == "__main__":
-    server = 'http://gmsh.info/bin'
-    version = '4.5.4'
-    iversion = version+'-1'  # installer number
+# Download server and gmsh version
+server = 'http://gmsh.info/bin'
+version = '4.5.4'
+iversion = version+'-1'  # installer number
 
-    system = platform.system().lower()
-    machine = platform.machine().lower()
-    plat = None
-    plat = 'Linux64' if 'linux' in system and '64' in machine else plat
-    plat = 'Linux32' if 'linux' in system and '64' not in machine else plat
-    plat = 'Windows64' if 'windows' in system and '64' in machine else plat
-    plat = 'Windows32' if 'windows' in system and '64' not in machine else plat
-    plat = 'MacOSX' if 'darwin' in system else plat
-    if plat is None:
-        raise TypeError(
-                "Platform '{}' is not supported.".format(system+'-'+machine))
-    name = "gmsh-{}-{}-sdk".format(version, plat)
-    ext = '.zip' if plat.startswith('Windows') else '.tgz'
-    fname = name + ext
-    if plat.startswith('Linux'):
-        url = server + "/Linux/" + fname
-    elif plat.startswith('Windows'):
-        url = server + "/Windows/" + fname
-    else:
-        url = server + "/MacOSX/" + fname
-    if not os.path.isfile('.downloaded'):
+# Determine file name and and url to be downloaded and installed
+system = platform.system().lower()
+machine = platform.machine().lower()
+plat = None
+plat = 'Linux64' if 'linux' in system and '64' in machine else plat
+plat = 'Linux32' if 'linux' in system and '64' not in machine else plat
+plat = 'Windows64' if 'windows' in system and '64' in machine else plat
+plat = 'Windows32' if 'windows' in system and '64' not in machine else plat
+plat = 'MacOSX' if 'darwin' in system else plat
+if plat is None:
+    raise TypeError(
+            "Platform '{}' is not supported.".format(system+'-'+machine))
+name = "gmsh-{}-{}-sdk".format(version, plat)
+ext = '.zip' if plat.startswith('Windows') else '.tgz'
+fname = name + ext
+if plat.startswith('Linux'):
+    url = server + "/Linux/" + fname
+elif plat.startswith('Windows'):
+    url = server + "/Windows/" + fname
+else:
+    url = server + "/MacOSX/" + fname
+
+
+# Create wrapper for install class
+class DownloadAndInstall(install):
+    def run(self):
+        self._download()
+        self._extract()
+        self._include()
+        install.run(self)
+    
+    def _download(self):
+        import requests
         print('Downloading {}, please wait...'.format(url))
         sdk = requests.get(url, allow_redirects=True)
         with open(fname, "wb") as f:
             f.write(sdk.content)
-        with open('.downloaded', 'a'):
-            pass
-    if not os.path.isfile('.extracted'):
+    
+    def _extract(self):
         print('Extracting {}, please wait...'.format(fname))
         tar = tarfile.open(fname) if ext == '.tgz' else zipfile.ZipFile(fname, 'r')
         tar.extractall()
-        with open('.extracted', 'a'):
-            pass
-    pth = open('gmsh.pth', 'w')
-    pth.write(name+'/lib\n')
-    pth.write(name+'/bin')
-    pth.close()
-    site_dirpath = sysconfig.get_python_lib(prefix='')
-    dirs = [site_dirpath]
-    files = [['gmsh.pth']]
-    for (dirpath, dirnames, filenames) in os.walk(name):
-        dirs += [os.path.join(site_dirpath, dirpath)]
-        files += [[os.path.join(dirpath, file) for file in filenames]]
-    data_files = list(zip(dirs, files))
-    scripts = ['gmsh', 'gmsh.bat'] if plat.startswith('Windows') else ['gmsh']
+    
+    def _include(self):
+        pth = open('gmsh.pth', 'w')
+        pth.write(name+'/lib\n')
+        pth.write(name+'/bin')
+        pth.close()
+        site_dirpath = sysconfig.get_python_lib(prefix='')
+        dirs = [site_dirpath]
+        files = [['gmsh.pth']]
+        for (dirpath, dirnames, filenames) in os.walk(name):
+            dirs += [os.path.join(site_dirpath, dirpath)]
+            files += [[os.path.join(dirpath, file) for file in filenames]]
+        data_files = list(zip(dirs, files))
+        self.distribution.include(data_files=data_files)
 
+
+# Run setup
+if __name__ == "__main__":
     setup(name            = 'gmsh-sdk',
         version           = iversion,
         description       = 'Gmsh SDK installer. Gmsh is a three-dimensional finite element mesh generator.',
@@ -94,7 +105,8 @@ if __name__ == "__main__":
                             'Programming Language :: C++',
                             'Programming Language :: Python :: Implementation :: CPython',
                             'Topic :: Scientific/Engineering'],
-        data_files=data_files,
-        scripts=scripts,
-        # install_requires=['requests']
+        # data_files=data_files,
+        scripts           = ['gmsh', 'gmsh.bat'] if plat.startswith('Windows') else ['gmsh'],
+        cmdclass          = {'install': DownloadAndInstall},
+        install_requires  = ['requests']
         )

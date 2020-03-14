@@ -4,7 +4,7 @@ python:
     - 3.6
 before_install:
     - sudo apt-get install libglu1-mesa
-    - pip install requests
+    # - pip install requests
 install:
     - python setup.py sdist
     - pip install dist/*
