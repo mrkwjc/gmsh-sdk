@@ -108,5 +108,5 @@ if __name__ == "__main__":
         # data_files=data_files,
         scripts           = ['gmsh', 'gmsh.bat'] if plat.startswith('Windows') else ['gmsh'],
         cmdclass          = {'install': DownloadAndInstall},
-        install_requires  = ['requests']
+        setup_requires    = ['requests']
         )
