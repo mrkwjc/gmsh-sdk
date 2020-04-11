@@ -20,7 +20,7 @@ from setuptools.command.install import install
 
 # Server and gmsh version
 server = 'http://gmsh.info/bin'
-version = '4.5.5'
+version = '4.5.6'
 iversion = version+'-1'  # installer number
 
 # Determine file name and and url to be downloaded and installed
