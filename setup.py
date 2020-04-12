@@ -20,8 +20,8 @@ from setuptools.command.install import install
 
 # Server and gmsh version
 server = 'http://gmsh.info/bin'
-version = '4.5.6'
-iversion = version+'-1'  # installer number
+version = 'stable'
+iversion = '9999-1'  # installer number
 
 # Determine file name and and url to be downloaded and installed
 system = platform.system().lower()
@@ -83,7 +83,7 @@ class DownloadAndInstall(install):
 
 # Run setup
 if __name__ == "__main__":
-    setup(name            = 'gmsh-sdk',
+    setup(name            = 'gmsh-sdk-stable',
         version           = iversion,
         description       = 'Gmsh SDK installer. Gmsh is a three-dimensional finite element mesh generator.',
         long_description  = open('README.rst', 'r').read(),
