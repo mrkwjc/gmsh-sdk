@@ -48,6 +48,8 @@ else:
 
 # Create wrapper for install class
 class DownloadAndInstall(install):
+    vname = None
+    
     def run(self):
         self._download()
         self._extract()
@@ -64,10 +66,13 @@ class DownloadAndInstall(install):
     def _extract(self):
         print('Extracting {}, please wait...'.format(fname))
         tar = tarfile.open(fname) if ext == '.tgz' else zipfile.ZipFile(fname, 'r')
+        flist = tar.getnames() if ext == '.tgz' else tar.namelist()
+        self.vname = os.path.commonprefix(flist)[:-1]
         tar.extractall()
     
     def _include(self):
         pth = open('gmsh.pth', 'w')
+        name = self.vname
         pth.write(name+'/lib\n')
         pth.write(name+'/bin')
         pth.close()
