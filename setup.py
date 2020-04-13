@@ -83,9 +83,9 @@ class DownloadAndInstall(install):
 
 # Run setup
 if __name__ == "__main__":
-    setup(name            = 'gmsh-sdk-stable',
+    setup(name            = 'gmsh-sdk-git',
         version           = iversion,
-        description       = 'Gmsh SDK installer. Gmsh is a three-dimensional finite element mesh generator.',
+        description       = 'Gmsh SDK installer (installs current git snapshot). Gmsh is a three-dimensional finite element mesh generator.',
         long_description  = open('README.rst', 'r').read(),
         long_description_content_type='text/x-rst',
         maintainer        = 'Marek Wojciechowski',
