@@ -7,7 +7,7 @@ Installation should work under Linux, Windows and MacOSX for both Python 2 and 3
 
 This package installs *latest git snapshot* of Gmsh SDK.
 
-Before installation make sure that possibly conflicting `gmsh-sdk` is uninstalled::
+Before installation make sure that possibly conflicting ``gmsh-sdk`` is uninstalled::
 
     $ pip uninstall gmsh-sdk
 
