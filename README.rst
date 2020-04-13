@@ -5,11 +5,15 @@ The aim of this package is to download and install the `Gmsh SDK <http://gmsh.in
 in a pythonic way, i.e. via ``pip`` command. **No gmsh files are maintained here**.
 Installation should work under Linux, Windows and MacOSX for both Python 2 and 3.
 
-Just install (or upgrade) ``gmsh-sdk``::
+Before installation make sure that possibly conflicting ``gmsh-sdk-git`` is uninstalled::
+
+    $ pip uninstall gmsh-sdk-git
+
+then install (or upgrade) ``gmsh-sdk``::
 
     $ pip install --upgrade gmsh-sdk
 
-and use it::
+and use::
 
     $ gmsh --help
     $ python -c "import gmsh; gmsh.initialize(['', '--help'])"
